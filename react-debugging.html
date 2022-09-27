@@ -8,87 +8,84 @@
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8" />
-    <script
-      src="https://unpkg.com/react@18/umd/react.development.js"
-      crossorigin
-    ></script>
-    <script
-      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
-      crossorigin
-    ></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <title>Intro to React</title>
-  </head>
-  <body>
-    <div id="react-container"></div>
 
-    <script type="text/babel">
+<head>
+  <meta charset="utf-8" />
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <title>Intro to React</title>
+</head>
 
-      // file: src/App.js
-      const { useState } = React
+<body>
+  <div id="react-container"></div>
 
-      const App = () => {
+  <script type="text/babel">
 
-        const suit = ["❤️", "♦️", "♠️", "♣️"]
-        const rank = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]
-        const [hand, setHand] = useState([])
+    // file: src/App.js
+    const { useState } = React
 
-        const drawCard = () => {
-          let draw = `${rank[Math.floor(Math.random() * rank.length)]} ${suit[Math.floor(Math.random() * suit.length)]}`
-          if(hand.indexOf(draw) === -1) {
-            setHand([...hand, draw])
-          } else if(hand.length !== 52) {
-            drawCard()
-          } else {
-            alert("All cards have been dealt.")
-          }
+    const App = () => {
+
+      const suit = ["❤️", "♦️", "♠️", "♣️"]
+      const rank = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]
+      const [hand, setHand] = useState([])
+
+      const drawCard = () => {
+        let draw = `${rank[Math.floor(Math.random() * rank.length)]} ${suit[Math.floor(Math.random() * suit.length)]}`
+        if (hand.indexOf(draw) === -1) {
+          setHand([...hand, draw])
+        } else if (hand.length !== 52) {
+          drawCard()
+        } else {
+          alert("All cards have been dealt.")
         }
+      }
 
-        const shuffle = () => {
-          setHand([])
-        }
+      const shuffle = () => {
+        setHand([])
+      }
 
-        const handStyles = {
-          display: "flex",
-          flexDirection: "row",
-          flexWrap: "wrap"
-        }
-        const cardStyles = {
-          border: "1px solid black",
-          width: "70px",
-          height: "95px",
-          margin: "10px",
-          padding: "10px"
-        }
-        // No need to change anything ABOVE this line ^
+      const handStyles = {
+        display: "flex",
+        flexDirection: "row",
+        flexWrap: "wrap"
+      }
+      const cardStyles = {
+        border: "1px solid black",
+        width: "70px",
+        height: "95px",
+        margin: "10px",
+        padding: "10px"
+      }
+      // No need to change anything ABOVE this line ^
 
-        return (
+      return (
+        //  There's a missing carrot tag*/}
+        <div>
           <h1>Draw a Card</h1>
-          <button onClick={}>
-            Click to Draw a Card
-          </button>
-          <button onclick={shuffle}>
-            Return Cards and Shuffle Deck
-          </button>
+          {/*  the function call is missing*/}
+          <button onClick={drawCard}>Click to Draw a Card</button>
+          {/*  the onclick command didn't use cammelCase syntax */}
+          <button onClick={shuffle}>Return Cards and Shuffle Deck</button>
           <div style={handStyles}>
             {hand.map((card, index) => {
               return (
                 <div style={cardStyles} key={index}>
                   {card}
                 </div>
-              )
+              );
             })}
           </div>
-        )
-      }
+        </div> //  There's a missing carrot tag
+      );
+    };
+    // No need to change anything below this line
 
-      // No need to change anything below this line
+    const domContainer = document.querySelector('#react-container')
+    const root = ReactDOM.createRoot(domContainer)
+    root.render(<App />)
+  </script>
+</body>
 
-      const domContainer = document.querySelector('#react-container')
-      const root = ReactDOM.createRoot(domContainer)
-      root.render(<App />)
-    </script>
-  </body>
 </html>
